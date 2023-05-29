@@ -108,7 +108,6 @@ export default class GraphExplore extends Plugin {
 						if (setNext) {
 							this.noteFiles.forEach((file: TFile) => {
 								if (file.basename === afterNote) {
-									console.log('setting incoming link: ', afterNote)
 									this.setNoteMetaDataFromFile(file, false, true);
 									return
 								}
@@ -149,7 +148,6 @@ export default class GraphExplore extends Plugin {
 
 						// read all files in our study scope
 						this.noteFiles = filePathsInGraph.map((filePath: string) => this.app.vault.getAbstractFileByPath(filePath) as TFile);
-						console.log('allNotes', this.noteFiles)
 						this.fileMetaDataMap = new Map<string, boolean[]>();
 						for (const file of this.noteFiles){
 							const meta = await this.readNoteMetaDataFromFile(file)
@@ -160,7 +158,6 @@ export default class GraphExplore extends Plugin {
 
 						// parse knowledge dependency relationships
 						this.linkMap = await this.getLinkMap(this.noteFiles);
-						console.log(this.linkMap);
 
 						// reset all of their meta data, but with the root notes, set next = true
 						this.noteFiles.forEach((file: TFile) => {
