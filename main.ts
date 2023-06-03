@@ -190,6 +190,11 @@ export default class GraphExplore extends Plugin {
 				this.settings.notesReadStatus = {};
 				this.saveSettings();
 
+				// reset all of their meta data to false
+				this.noteFiles.forEach((file: TFile) => {
+					this.setNoteMetaDataFromFile(file, false, false);
+				})
+
 				statusBarItemEl.setText('Not Walking the Graph');
 			}
 		});
